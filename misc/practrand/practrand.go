@@ -10,14 +10,15 @@ import (
 	"encoding/binary"
 	"flag"
 	"fmt"
-	"github.com/valyala/fastrand"
-	exprand "golang.org/x/exp/rand"
 	"hash/maphash"
 	"log"
 	"math"
 	"math/bits"
 	mathrand "math/rand"
 	"os"
+
+	"github.com/valyala/fastrand"
+	exprand "golang.org/x/exp/rand"
 	"pgregory.net/rand"
 )
 
@@ -193,8 +194,12 @@ func run(gen string, transform string, shuffle string) error {
 		g = rng(s).fromF64
 	case "norm":
 		g = rng(s).fromNorm
+	case "norm1024":
+		g = rng(s).fromExtNorm
 	case "exp":
 		g = rng(s).fromExp
+	case "exp1024":
+		g = rng(s).fromExtExp
 	case "8seed":
 		seeds := [8]uint64{1, 2, 4, 8, 16, 32, 64, 128}
 		gens := [8]*rand64{}
